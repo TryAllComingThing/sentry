@@ -120,16 +120,16 @@ class OrganizationTagKeyValuesTest(APITestCase, SnubaTestCase):
         group = self.create_group(project=project)
 
         self.create_event(
-            'a' * 32, group=group, datetime=self.min_ago, tags={'sentry:release': '3.1.2'},
+            'a' * 32, group=group, datetime=self.day_ago, tags={'sentry:release': '3.1.2'},
         )
         self.create_event(
             'b' * 32, group=group, datetime=self.min_ago, tags={'sentry:release': '4.1.2'},
         )
         self.create_event(
-            'c' * 32, group=group, datetime=self.min_ago, tags={'sentry:release': '3.1.2'},
+            'c' * 32, group=group, datetime=self.day_ago, tags={'sentry:release': '3.1.2'},
         )
         self.create_event(
-            'd' * 32, group=group, datetime=self.min_ago, tags={'sentry:release': '5.1.2'},
+            'd' * 32, group=group, datetime=timezone.now() - timedelta(seconds=10), tags={'sentry:release': '5.1.2'},
         )
 
         url = reverse(
